@@ -26,14 +26,14 @@ struct MainTabView: View {
                 }
                 .tag(1)
 
-            Text("Upload View")
+            Text("Upload")
                 .tabItem {
                     Label("", systemImage: "plus")
                         .environment(\.symbolVariants, selectedTab == 2 ? .fill : .none)
                 }
                 .tag(2)
 
-            Text("Notifications View")
+            NotificationsView()
                 .tabItem {
                     Label("Notifications", systemImage: "heart")
                         .environment(\.symbolVariants, selectedTab == 3 ? .fill : .none)
