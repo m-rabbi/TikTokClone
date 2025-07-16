@@ -32,6 +32,21 @@ struct ProfileHeaderView: View {
                 UserStatView(value: 7, title: "Likes")
 
             }
+            
+            // aciton button
+            Button {
+                
+            } label: {
+                Text("Edit Profile")
+                    .font(.subheadline)
+                    .fontWeight(.semibold)
+                    .frame(width: 400, height: 32)
+                    .foregroundStyle(.black)
+                    .background(Color(.systemGray6))
+                    .clipShape(RoundedRectangle(cornerRadius: 6))
+            }
+            
+            Divider()
         }
     }
 }
