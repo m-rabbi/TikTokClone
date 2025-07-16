@@ -17,9 +17,9 @@ struct MainTabView: View {
                     Label("Home", systemImage: "house")
                         .environment(\.symbolVariants, selectedTab == 0 ? .fill : .none)
                 }
-                .tag(0)
+                .tag(0) 
 
-            Text("Search View")
+            ExploreView()
                 .tabItem {
                     Label("Friends", systemImage: "person.2")
                         .environment(\.symbolVariants, selectedTab == 1 ? .fill : .none)
