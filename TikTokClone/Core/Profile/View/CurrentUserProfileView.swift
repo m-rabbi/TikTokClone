@@ -14,7 +14,9 @@ struct CurrentUserProfileView: View {
                 VStack(spacing: 2) {
                     // profile header
                     ProfileHeaderView()
+                    
                     // post grid view
+                    PostGridView()
                 }
                 .padding(.top)
             }
