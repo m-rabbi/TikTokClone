@@ -8,28 +8,46 @@
 import SwiftUI
 
 struct MainTabView: View {
+    @State private var selectedTab: Int = 0
+
     var body: some View {
-        TabView {
-            Tab("Home", systemImage: "house") {
-                Text("Feed View")
-            }
+        TabView(selection: $selectedTab) {
+            Text("Feed View")
+                .tabItem {
+                    Label("Home", systemImage: "house")
+                        .environment(\.symbolVariants, selectedTab == 0 ? .fill : .none)
+                }
+                .tag(0)
 
-            Tab("Friends", systemImage: "person.2") {
-                Text("Search View")
-            }
+            Text("Search View")
+                .tabItem {
+                    Label("Friends", systemImage: "person.2")
+                        .environment(\.symbolVariants, selectedTab == 1 ? .fill : .none)
+                }
+                .tag(1)
 
-            Tab("", systemImage: "plus") {
-                Text("Upload View")
-            }
+            Text("Upload View")
+                .tabItem {
+                    Label("", systemImage: "plus")
+                        .environment(\.symbolVariants, selectedTab == 2 ? .fill : .none)
+                }
+                .tag(2)
 
-            Tab("Notifications", systemImage: "heart") {
-                Text("Notifications View")
-            }
+            Text("Notifications View")
+                .tabItem {
+                    Label("Notifications", systemImage: "heart")
+                        .environment(\.symbolVariants, selectedTab == 3 ? .fill : .none)
+                }
+                .tag(3)
 
-            Tab("Profile", systemImage: "person") {
-                Text("Profile View")
-            }
+            Text("Profile View")
+                .tabItem {
+                    Label("Profile", systemImage: "person")
+                        .environment(\.symbolVariants, selectedTab == 4 ? .fill : .none)
+                }
+                .tag(4)
         }
+        .tint(.black)
     }
 }
 
