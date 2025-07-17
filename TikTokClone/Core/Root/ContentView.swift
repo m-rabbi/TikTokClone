@@ -8,19 +8,27 @@
 import SwiftUI
 
 struct ContentView: View {
-    @StateObject var viewModel = ContentViewModel(authService: AuthService())
+    @StateObject var viewModel: ContentViewModel
+    
+    private let authService: AuthService
+    
+    init(authService: AuthService) {
+        self.authService = authService
+        
+        self._viewModel = StateObject(wrappedValue: ContentViewModel(authService: authService))
+    }
     
     var body: some View {
         Group {
             if viewModel.userSession != nil {
-                MainTabView()
+                MainTabView(authService: authService)
             } else {
-                LoginView()
+                LoginView(authService: authService)
             }
         }
     }
 }
 
 #Preview {
-    ContentView()
+    ContentView(authService: AuthService())
 }
