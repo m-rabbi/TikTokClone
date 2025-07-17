@@ -6,3 +6,64 @@ build/
 DerivedData/
 *.xcworkspace
 xcuserdata/
+*.xcodeproj/project.xcworkspace/xcuserdata
+*.xcodeproj/xcuserdata/
+
+# SwiftPM
+.swiftpm/
+Packages/
+Package.resolved
+
+# CocoaPods
+Pods/
+Podfile.lock
+
+# Carthage
+Carthage/
+Carthage/Build/
+
+# Firebase / Google Services
+GoogleService-Info.plist
+
+# Fastlane
+fastlane/report.xml
+fastlane/Preview.html
+fastlane/screenshots/**/*.png
+fastlane/test_output
+
+# Archives
+*.xcarchive
+*.ipa
+*.dSYM.zip
+*.dSYM
+
+# Playgrounds
+timeline.xctimeline
+playground.xcworkspace
+
+# Logs and user-specific
+*.log
+*.swp
+*.swo
+*.orig
+
+# App files and uploads
+*.mobileprovision
+*.appex
+*.app
+
+# IDEs
+.idea/
+*.iml
+
+# SPM Build
+.build/
+
+# Environment files
+.env
+.env.*
+
+# User settings
+*.local
+*.user
+*.db
