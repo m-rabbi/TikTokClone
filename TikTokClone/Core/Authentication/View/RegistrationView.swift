@@ -10,7 +10,7 @@ import SwiftUI
 struct RegistrationView: View {
     @State private var email: String = ""
     @State private var password: String = ""
-    @State private var fullName: String = ""
+    @State private var fullname: String = ""
     @State private var username: String = ""
     
     @Environment(\.dismiss) var dismiss
@@ -35,7 +35,7 @@ struct RegistrationView: View {
                 SecureField("Enter your password...", text: $password)
                     .modifier(StandardTextFieldModifier())
                 
-                TextField("Enter your full name...", text: $fullName)
+                TextField("Enter your full name...", text: $fullname)
                     .modifier(StandardTextFieldModifier())
                 
                 TextField("Enter your username...", text: $username)
@@ -56,6 +56,8 @@ struct RegistrationView: View {
                 
             }
             .padding(.vertical)
+            .disabled(!formIsValid)
+            .opacity(formIsValid ? 1 : 0.5)
             
             Spacer()
             
@@ -78,6 +80,20 @@ struct RegistrationView: View {
         }
         .navigationBarBackButtonHidden()
 
+    }
+}
+
+// MARK: - AuthenticationFormProtocol
+
+extension RegistrationView: AuthenticationFormProtocol {
+    var formIsValid: Bool {
+        return !email.isEmpty &&
+        email.contains("@") &&
+        email.contains(".") &&
+        !password.isEmpty &&
+        !fullname.isEmpty &&
+        !username.isEmpty
+        
     }
 }
 

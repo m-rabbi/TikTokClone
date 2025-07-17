@@ -59,6 +59,8 @@ struct LoginView: View {
                     
                 }
                 .padding(.vertical)
+                .disabled(!formIsValid)
+                .opacity(formIsValid ? 1 : 0.7)
                 
                 Spacer()
                 
@@ -81,6 +83,18 @@ struct LoginView: View {
 
             }
         }
+    }
+}
+
+// MARK: - AuthenticationFormProtocol
+
+extension LoginView: AuthenticationFormProtocol {
+    var formIsValid: Bool {
+        return !email.isEmpty &&
+        email.contains("@") &&
+        email.contains(".") &&
+        !password.isEmpty
+        
     }
 }
 
