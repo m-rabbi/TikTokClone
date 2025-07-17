@@ -14,6 +14,7 @@ struct RegistrationView: View {
     @State private var username: String = ""
     
     @Environment(\.dismiss) var dismiss
+    @StateObject var viewModel = RegistrationViewModel(authService: AuthService())
     
     var body: some View {
         VStack {
@@ -28,23 +29,25 @@ struct RegistrationView: View {
             
             // textfields
             VStack {
-                TextField("Enter your email...", text: $email)
+                TextField("Enter your email", text: $email)
                     .textInputAutocapitalization(.never)
                     .modifier(StandardTextFieldModifier())
                 
-                SecureField("Enter your password...", text: $password)
+                SecureField("Enter your password", text: $password)
                     .modifier(StandardTextFieldModifier())
                 
-                TextField("Enter your full name...", text: $fullname)
+                TextField("Enter your full name", text: $fullname)
+                    .textInputAutocapitalization(.words)
                     .modifier(StandardTextFieldModifier())
                 
-                TextField("Enter your username...", text: $username)
+                TextField("Enter your username", text: $username)
+                    .textInputAutocapitalization(.never)
                     .modifier(StandardTextFieldModifier())
             }
             
             // sign up button
             Button {
-                print("DEBUG: Signup button tapped")
+                Task { await viewModel.createUser(withEmail: email, password: password, username: username, fullname: fullname) }
             } label: {
                 Text("Sign Up")
                     .font(.subheadline)

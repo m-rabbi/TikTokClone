@@ -11,6 +11,8 @@ struct LoginView: View {
     @State private var email = ""
     @State private var password = ""
     
+    @StateObject var viewModel = LoginViewModel(authService: AuthService())
+    
     var body: some View {
         NavigationStack {
             VStack {
@@ -25,11 +27,11 @@ struct LoginView: View {
                 
                 // textfields
                 VStack {
-                    TextField("Enter your email...", text: $email)
+                    TextField("Enter your email", text: $email)
                         .textInputAutocapitalization(.never)
                         .modifier(StandardTextFieldModifier())
                     
-                    SecureField("Enter your password...", text: $password)
+                    SecureField("Enter your password", text: $password)
                         .modifier(StandardTextFieldModifier())
                 }
                 
@@ -47,7 +49,9 @@ struct LoginView: View {
                 
                 // login button
                 Button {
-                    print("DEBUG: Login button tapped")
+                    Task {
+                        await viewModel.login(withEmail: email, password: password)
+                    }
                 } label: {
                     Text("Login")
                         .font(.subheadline)
