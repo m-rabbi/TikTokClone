@@ -8,6 +8,12 @@
 import FirebaseAuth
 
 class AuthService {
+    @Published var userSession: FirebaseAuth.User?
+    
+    func updateUserSession() {
+        self.userSession = Auth.auth().currentUser
+    }
+    
     func login(withEmail email: String, passoword: String) async throws {
         print("DEBUG: Logged in with email: \(email)")
     }
