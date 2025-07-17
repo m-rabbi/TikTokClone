@@ -7,6 +7,7 @@
 
 import FirebaseAuth
 
+@MainActor
 class AuthService {
     @Published var userSession: FirebaseAuth.User?
     
@@ -30,6 +31,7 @@ class AuthService {
         do {
             let result = try await Auth.auth().createUser(withEmail: email, password: passoword)
             print("DEBUG: User created with uid: \(result.user.uid)")
+            self.userSession = result.user
         } catch {
             print("DEBUG: Error creating user: \(error.localizedDescription)")
             throw error
