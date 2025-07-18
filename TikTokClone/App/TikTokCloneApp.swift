@@ -21,10 +21,11 @@ struct TikTokCloneApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     
     private let authService = AuthService()
+    private let userService = UserService()
     
     var body: some Scene {
         WindowGroup {
-            ContentView(authService: authService)
+            ContentView(authService: authService, userService: userService)
         }
     }
 }
