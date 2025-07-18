@@ -15,10 +15,15 @@ struct ExploreView: View {
             ScrollView {
                 LazyVStack(spacing: 16) {
                     ForEach(viewModel.users) { user in
-                        UserCell(user: user)
+                        NavigationLink(value: user) {
+                            UserCell(user: user)
+                        }
                     }
                 }
             }
+            .navigationDestination(for: User.self, destination: { user in
+                Text("User is \(user.username)")
+            })
             .navigationTitle("Explore")
             .navigationBarTitleDisplayMode(.inline)
             .padding(.top)
