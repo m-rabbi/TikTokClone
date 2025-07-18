@@ -22,7 +22,7 @@ struct ExploreView: View {
                 }
             }
             .navigationDestination(for: User.self, destination: { user in
-                Text("User is \(user.username)")
+                UserProfileView(user: user)
             })
             .navigationTitle("Explore")
             .navigationBarTitleDisplayMode(.inline)
