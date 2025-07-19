@@ -34,7 +34,7 @@ struct MainTabView: View {
                 }
                 .tag(1)
 
-            Text("Upload")
+            MediaSelectorView()
                 .tabItem {
                     Label("", systemImage: "plus")
                         .environment(\.symbolVariants, selectedTab == 2 ? .fill : .none)
