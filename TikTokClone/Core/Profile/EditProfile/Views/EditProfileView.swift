@@ -11,6 +11,7 @@ import PhotosUI
 struct EditProfileView: View {
     @State private var selectedPickerItem: PhotosPickerItem?
     @State private var profileImage: Image?
+    @Environment(\.dismiss) var dismiss
     
     let user: User
     
@@ -45,11 +46,11 @@ struct EditProfileView: View {
                         .foregroundStyle(Color(.systemGray2))
                         .fontWeight(.semibold)
                     
-                    EditProfileOptionRowView(option: EditProfileOptions.name, value: "Lewis Hamilton")
+                    EditProfileOptionRowView(option: EditProfileOptions.name, value: user.fullname)
                     
-                    EditProfileOptionRowView(option: EditProfileOptions.username, value: "lewis.hamilton")
+                    EditProfileOptionRowView(option: EditProfileOptions.username, value: user.username)
                     
-                    EditProfileOptionRowView(option: EditProfileOptions.bio, value: "Formula 1 driver")
+                    EditProfileOptionRowView(option: EditProfileOptions.bio, value: user.bio ?? "Add a bio")
                     
                     
                 }
@@ -68,14 +69,14 @@ struct EditProfileView: View {
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
                     Button("Cancel") {
-                        print("DEBUG: Cancel")
+                        dismiss()
                     }
                     .foregroundStyle(.black)
                 }
                 
                 ToolbarItem(placement: .topBarTrailing) {
                     Button("Done") {
-                        print("DEBUG: Cancel")
+                        dismiss()
                     }
                     .fontWeight(.semibold)
                     .foregroundStyle(.black)

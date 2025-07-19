@@ -51,7 +51,7 @@ struct ProfileHeaderView: View {
             
             Divider()
         }
-        .sheet(isPresented: $showEditProfile) {
+        .fullScreenCover(isPresented: $showEditProfile) {
             EditProfileView(user: user)
         }
     }
