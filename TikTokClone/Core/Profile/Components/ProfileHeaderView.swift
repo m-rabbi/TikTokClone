@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct ProfileHeaderView: View {
+    @State private var showEditProfile = false
     let user: User
     
     var body: some View {
@@ -37,7 +38,7 @@ struct ProfileHeaderView: View {
             
             // aciton button
             Button {
-                
+                showEditProfile.toggle()
             } label: {
                 Text("Edit Profile")
                     .font(.subheadline)
@@ -49,6 +50,9 @@ struct ProfileHeaderView: View {
             }
             
             Divider()
+        }
+        .sheet(isPresented: $showEditProfile) {
+            EditProfileView(user: user)
         }
     }
 }

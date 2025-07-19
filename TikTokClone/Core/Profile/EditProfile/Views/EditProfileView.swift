@@ -12,6 +12,8 @@ struct EditProfileView: View {
     @State private var selectedPickerItem: PhotosPickerItem?
     @State private var profileImage: Image?
     
+    let user: User
+    
     var body: some View {
         NavigationStack {
             VStack {
@@ -43,61 +45,47 @@ struct EditProfileView: View {
                         .foregroundStyle(Color(.systemGray2))
                         .fontWeight(.semibold)
                     
-                    HStack {
-                        Text("Name")
-                        
-                        Spacer()
-                        
-                        Text("Lewis Hamilton")
-                    }
+                    EditProfileOptionRowView(option: EditProfileOptions.name, value: "Lewis Hamilton")
                     
-                    HStack {
-                        Text("Username ")
-                        
-                        Spacer()
-                        
-                        Text("lewis.hamilton")
-                    }
+                    EditProfileOptionRowView(option: EditProfileOptions.username, value: "lewis.hamilton")
                     
-                    HStack {
-                        Text("Bio")
-                        
-                        Spacer()
-                        
-                        Text("Add a bio")
-                    }
-                }
-                .task(id: selectedPickerItem) {
-                    await loadImage(fromItem: selectedPickerItem)
+                    EditProfileOptionRowView(option: EditProfileOptions.bio, value: "Formula 1 driver")
+                    
+                    
                 }
                 .font(.subheadline)
                 .padding()
-                
                 Spacer()
-                    .navigationTitle("Edit Profile")
-                    .navigationBarTitleDisplayMode(.inline)
-                    .toolbar {
-                        ToolbarItem(placement: .topBarLeading) {
-                            Button("Cancel") {
-                                print("DEBUG: Cancel")
-                            }
-                            .foregroundStyle(.black)
-                        }
-                        
-                        ToolbarItem(placement: .topBarTrailing) {
-                            Button("Done") {
-                                print("DEBUG: Cancel")
-                            }
-                            .fontWeight(.semibold)
-                            .foregroundStyle(.black)
-                        }
+            }
+            .task(id: selectedPickerItem) {
+                await loadImage(fromItem: selectedPickerItem)
+            }
+            .navigationDestination(for: EditProfileOptions.self) { option in
+                EditProfileDetailView(option: option, user: user)
+            }
+            .navigationTitle("Edit Profile")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .topBarLeading) {
+                    Button("Cancel") {
+                        print("DEBUG: Cancel")
                     }
+                    .foregroundStyle(.black)
+                }
+                
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button("Done") {
+                        print("DEBUG: Cancel")
+                    }
+                    .fontWeight(.semibold)
+                    .foregroundStyle(.black)
+                }
             }
         }
     }
 }
 
-extension EditProfileView {
+private extension EditProfileView {
     func loadImage(fromItem item: PhotosPickerItem?) async {
         guard let item else { return }
         
@@ -108,5 +96,7 @@ extension EditProfileView {
 }
 
 #Preview {
-    EditProfileView()
+    EditProfileView(user: DeveloperPreview.user)
 }
+
+ 
